@@ -1,0 +1,20 @@
+{% extends 'patients/layout.html' %}
+
+{% block body %}
+    <div class="bg-white p-4 border rounded">
+        <div class="d-flex justify-content-between">
+            <h2>{{ patient.first_name }} {{ patient.last_name }}</h2>
+            <a href="{% url 'patients:patient_update' patient.pk %}" class="btn btn-warning">Edit Details</a>
+        </div>
+        <p class="text-muted">Hospital ID: <strong>{{ patient.hospital_number }}</strong></p>
+        <hr>
+
+        <p><strong>Age:</strong> {{ patient.age }}</p>
+        <p><strong>Gender:</strong> {{ patient.gender }}</p>
+        <p><strong>Phone:</strong> {{ patient.phone }}</p>
+        <p><strong>Address:</strong> {{ patient.address }}</p>
+        <p><strong>Blood Group:</strong> {{ patient.blood_group|default:"Not specified" }}</p>
+        <p><strong>Allergies:</strong> {{ patient.allergies|default:"None" }}</p>
+        <p><strong>Next of Kin:</strong> {{ patient.next_of_kin }} ({{ patient.next_of_kin_phone }})</p>
+    </div>
+{% endblock %}

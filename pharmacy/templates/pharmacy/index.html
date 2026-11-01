@@ -1,0 +1,65 @@
+{% extends 'patients/layout.html' %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Pharmacy & Inventory</h2>
+        <div>
+            <a href="{% url 'pharmacy:add_medicine' %}" class="btn btn-primary me-2">+ Add Medicine</a>
+            <a href="{% url 'pharmacy:add_prescription' %}" class="btn btn-success">+ Issue Prescription</a>
+        </div>
+    </div>
+
+    <h4>Drug Inventory</h4>
+    <table class="table table-bordered bg-white mb-5">
+        <thead class="table-dark">
+            <tr>
+                <th>Medicine Name</th>
+                <th>Category</th>
+                <th>Stock Left</th>
+                <th>Expiry Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for med in medicines %}
+            <tr>
+                <td><strong>{{ med.name }}</strong></td>
+                <td>{{ med.category }}</td>
+                <td>
+                    {% if med.stock_quantity <= 5 %}
+                        <span class="badge bg-danger">{{ med.stock_quantity }} (Low Stock!)</span>
+                    {% else %}
+                        <span class="badge bg-success">{{ med.stock_quantity }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ med.expiry_date }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No medicines added to inventory.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h4>Prescriptions Log</h4>
+    <table class="table table-bordered bg-white">
+        <thead class="table-dark">
+            <tr>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Medicine</th>
+                <th>Dosage & Duration</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pres in prescriptions %}
+            <tr>
+                <td><strong>{{ pres.patient.first_name }} {{ pres.patient.last_name }}</strong></td>
+                <td>Dr. {{ pres.doctor.name }}</td>
+                <td>{{ pres.medicine.name }}</td>
+                <td>{{ pres.dosage }} for {{ pres.duration }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No prescriptions issued yet.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends 'patients/layout.html' %}
+
+{% block body %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Doctors Directory</h2>
+        <a href="{% url 'doctors:add_doctor' %}" class="btn btn-primary">+ Add New Doctor</a>
+    </div>
+
+    <table class="table table-bordered bg-white">
+        <thead class="table-dark">
+            <tr>
+                <th>Doctor Name</th>
+                <th>Department</th>
+                <th>Specialization</th>
+                <th>Phone</th>
+                <th>Availability</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doctor in doctors %}
+            <tr>
+                <td><strong>Dr. {{ doctor.name }}</strong></td>
+                <td>{{ doctor.department }}</td>
+                <td>{{ doctor.specialization }}</td>
+                <td>{{ doctor.phone }}</td>
+                <td>
+                    {% if doctor.is_available %}
+                        <span class="badge bg-success">Available</span>
+                    {% else %}
+                        <span class="badge bg-secondary">On Leave</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'doctors:detail' doctor.pk %}" class="btn btn-sm btn-info text-white">View Profile</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="6">No doctors registered in database yet.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "dashboard/layout.html" %}
+
+{% block body %}
+    <h1>Hospital System Overview</h1>
+    <p class="subtitle">Welcome to IB's hospital dashboard. 
+        No promises you'll make it out alive but we'll try our best to keep you safe. </p>
+
+    <section class="stats" aria-label="Hospital statistics">
+        <article class="stat-card">
+            <p class="stat-label">Total Patients</p>
+            <p class="stat-value">{{ patient_count }}</p>
+        </article>
+        <article class="stat-card">
+            <p class="stat-label">Total Doctors</p>
+            <p class="stat-value">{{ doctor_count }}</p>
+        </article>
+        <article class="stat-card">
+            <p class="stat-label">Appointments</p>
+            <p class="stat-value">{{ appointment_count }}</p>
+        </article>
+        <article class="stat-card">
+            <p class="stat-label">Medicines in Stock</p>
+            <p class="stat-value">{{ medicine_count }}</p>
+        </article>
+    </section>
+
+    <section class="panel" aria-labelledby="stock-heading">
+        <h2 id="stock-heading">Pharmacy Alerts &amp; Low Stock</h2>
+        <ul class="alert-list">
+        {% for item in low_stock %}
+            <li>
+                <strong>Low stock:</strong>
+                {{ item.name }} has {{ item.stock_quantity }} units remaining.
+            </li>
+        {% empty %}
+            <li class="healthy">All medicine stock levels are healthy.</li>
+        {% endfor %}
+        </ul>
+    </section>
+
+{% endblock %}
+   

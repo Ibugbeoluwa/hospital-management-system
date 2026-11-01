@@ -1,0 +1,67 @@
+{% extends 'patients/layout.html' %}
+
+{% block body %}
+    <div class="card shadow-sm border-0" style="max-width: 720px; margin: 0 auto; border-radius: 18px; overflow: hidden;">
+        <div class="card-header text-white" style="background: linear-gradient(135deg, #0f766e, #14b8a6); border: none; padding: 20px 24px;">
+            <h2 class="mb-0" style="font-size: 1.7rem; font-weight: 600;">{{ title }}</h2>
+        </div>
+
+        <div class="card-body p-4 p-md-5">
+            <form method="POST" class="row g-3">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="col-12">
+                        <label for="{{ field.id_for_label }}" class="form-label fw-semibold" style="color: #334155;">
+                            {{ field.label }}
+                        </label>
+                        {{ field }}
+                        {% if field.help_text %}
+                            <small class="text-muted d-block mt-1">{{ field.help_text }}</small>
+                        {% endif %}
+                        {% if field.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ field.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+                <div class="col-12 d-flex gap-2 mt-4">
+                    <button type="submit" class="btn btn-primary px-4 py-2" style="background: #0f766e; border: none; border-radius: 10px; font-weight: 600;">
+                        Save Patient
+                    </button>
+                    <a href="{% url 'patients:index' %}" class="btn btn-outline-secondary px-4 py-2" style="border-radius: 10px; font-weight: 600;">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <style>
+        form input,
+        form select,
+        form textarea {
+            width: 100%;
+            padding: 0.75rem 0.9rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            background: #f8fafc;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        form input:focus,
+        form select:focus,
+        form textarea:focus {
+            border-color: #14b8a6;
+            box-shadow: 0 0 0 0.2rem rgba(20, 184, 166, 0.12);
+            outline: none;
+            background: #fff;
+        }
+
+        .btn-primary:hover {
+            background: #0b5f5a !important;
+        }
+    </style>
+{% endblock %}

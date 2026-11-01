@@ -1,0 +1,12 @@
+{% extends 'patients/layout.html' %}
+
+{% block body %}
+    <h2>Issue New Prescription</h2>
+
+    <form method="POST" class="bg-white p-4 border rounded" style="max-width: 600px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Issue Prescription</button>
+        <a href="{% url 'pharmacy:index' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

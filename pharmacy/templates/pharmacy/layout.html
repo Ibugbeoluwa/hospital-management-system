@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hospital System - Pharmacy</title>
+</head>
+<body>
+    <nav>
+        <a href="{% url 'patients:index' %}">Patients</a> | 
+        <a href="{% url 'doctors:index' %}">Doctors</a> | 
+        <a href="{% url 'appointments:index' %}">Appointments</a> | 
+        <a href="{% url 'pharmacy:index' %}">Pharmacy Dashboard</a> | 
+        <a href="{% url 'pharmacy:add_medicine' %}">Add Medicine</a> | 
+        <a href="{% url 'pharmacy:add_prescription' %}">Issue Prescription</a>
+    </nav>
+    <hr>
+
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'patients/layout.html' %}
+
+{% block body %}
+    <div class="bg-white p-4 border rounded">
+        <h2>Appointment Details</h2>
+        <hr>
+
+        <p><strong>Patient:</strong> {{ appointment.patient.first_name }} {{ appointment.patient.last_name }} ({{ appointment.patient.hospital_number }})</p>
+        <p><strong>Doctor:</strong> Dr. {{ appointment.doctor.name }} - {{ appointment.doctor.department }}</p>
+        <p><strong>Date:</strong> {{ appointment.appointment_date }}</p>
+        <p><strong>Time:</strong> {{ appointment.appointment_time }}</p>
+        <p><strong>Reason for Visit:</strong> {{ appointment.reason|default:"None provided" }}</p>
+        <p><strong>Status:</strong> <strong>{{ appointment.status }}</strong></p>
+
+        <a href="{% url 'appointments:update_status' appointment.pk %}" class="btn btn-warning mt-3">Edit / Reschedule / Cancel</a>
+        <a href="{% url 'appointments:index' %}" class="btn btn-secondary mt-3">Back to Directory</a>
+    </div>
+{% endblock %}
