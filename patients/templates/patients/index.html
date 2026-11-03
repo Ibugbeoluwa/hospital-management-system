@@ -1,7 +1,10 @@
 {% extends 'patients/layout.html' %}
 
 {% block body %}
-    <h2>Patients Directory</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Patients Directory</h2>
+        <a href="{% url 'patients:add_patient' %}" class="btn btn-primary">+ Add New Patient</a>
+    </div>
 
     <!-- Simple GET form for searching by first name -->
     <form method="GET" class="my-3">
